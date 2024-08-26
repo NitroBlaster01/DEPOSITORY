@@ -1,0 +1,157 @@
+<body>
+  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="fa-solid fa-earth-americas"></i> Home</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="../login"
+            >
+              <i class="fa-solid fa-right-to-bracket"></i> Login</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="../signup">
+              <i class="fa-solid fa-user-plus"></i> Signup</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
+              data-bs-toggle="modal"
+              data-bs-target="#shoppingCartModal"
+            >
+              <i class="fa-solid fa-cart-shopping"></i> Shopping Cart</a
+            >
+          </li>
+        </ul>
+        <!-- <form class="d-flex">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form> -->
+        <app-search-bar></app-search-bar>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let prod of products" class="col-md-4">
+        <!-- <div *ngIf="prod.quantity > 0" class="item"> -->
+        <div class="item">
+          <h4>{{ prod.name }}</h4>
+          <p class="text-primary">${{ prod.price.toFixed(2) }}</p>
+          <img src="{{ prod.imageUrl }}" alt="camera" class="img-fluid" />
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <a
+              data-bs-toggle="modal"
+              data-bs-target="#reviewsModal"
+              class="btn btn-unique"
+              data-abc="true"
+              >View Reviews
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Modal -->
+  <div
+    class="modal fade"
+    id="shoppingCartModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Shopping Cart</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Please Login to have access to your shopping cart.
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Modal -->
+  <div
+    class="modal fade"
+    id="reviewsModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Reviews</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Display reviews here. This modal is scrollable.<br />
+          Maybe we should display comments and rating points here<br />
+          Maybe comments and rating points here is readable but not writable?
+          <br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          Test scrollable
+          <!-- <app-shopping-cart></app-shopping-cart> -->
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

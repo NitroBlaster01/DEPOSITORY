@@ -1,0 +1,196 @@
+<body>
+  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="fa-solid fa-house"></i> Logout</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              type="button"
+              (click)="accessCart()"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <i class="fa-solid fa-cart-shopping"></i> Shopping Cart</a
+            >
+          </li>
+        </ul>
+        <app-search-bar></app-search-bar>
+      </div>
+    </div>
+  </nav>
+
+  <!-- <button type="button" (click)="logOut()">Log Out</button>
+<button type="button" (click)="accessCart()">Cart</button> -->
+  <!-- <div id="wrapper">
+  <div *ngFor="let prod of products" class="invitem-wrapper">
+    <div *ngIf="prod.quantity != 0" class="invitem">
+      <img src="{{ prod.imageUrl }}" />
+      <h1>{{ prod.name }}</h1>
+      <h2>${{ prod.price.toFixed(2) }}</h2>
+      <form action="">
+        Purchase item:
+        <input
+          id="productquantity"
+          type="number"
+          #quantity
+          step="1"
+          min="0"
+          max="{{ prod.quantity }}"
+          placeholder="Qty."
+        />
+        /{{ prod.quantity }}
+      </form>
+      <button (click)="addToCart(prod, quantity.value)">Add To Cart</button>
+    </div>
+  </div>
+</div> -->
+
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let prod of products" class="col-md-4">
+        <!-- <div *ngIf="prod.quantity > 0" class="item"> -->
+        <div class="item">
+          <h4>{{ prod.name }}</h4>
+          <img src="{{ prod.imageUrl }}" />
+          <p class="text-primary">${{ prod.price.toFixed(2) }}</p>
+          <form action="">
+            Purchase item:
+            <input
+              id="productquantity"
+              type="number"
+              #quantity
+              step="1"
+              min="0"
+              max="{{ prod.quantity }}"
+              placeholder="Qty."
+            />
+            /{{ prod.quantity }}
+          </form><br>
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-primary"
+              (click)="addToCart(prod, quantity.value)"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#successMessage"
+            >
+              Add To Cart
+            </button>
+            <button
+              type = "button"
+              class = "btn btn-unique"
+              data-bs-toggle ="modal"
+              data-bs-target = "#reviewsModal"
+              >
+              View Reviews
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal -->
+  <div class="modal fade" id="successMessage" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="thank-you-pop">
+            <img
+              src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png"
+              alt=""
+            />
+            <h1>Thank You!</h1>
+            <p>Product added to your shopping cart.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Modal -->
+  <div
+    class="modal fade"
+    id="reviewsModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Reviews</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Display reviews here. This modal is scrollable.<br />
+          Maybe we should display comments and rating points here<br />
+          Maybe comments and rating points here is readable but not writable?
+          <br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          Test scrollable
+          <!-- <app-shopping-cart></app-shopping-cart> -->
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Modal -->
+<!-- <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Shopping Cart</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Display shopping cart here.</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->

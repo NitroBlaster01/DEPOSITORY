@@ -1,0 +1,42 @@
+package com.estore.api.estoreapi.persistence;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.estore.api.estoreapi.model.User;
+
+public class AuthenticationDAO{
+
+    private static final Logger LOG = Logger.getLogger(AuthenticationDAO.class.getName());
+
+    List<User> userlist; 
+
+    private ObjectMapper objectMapper;
+    private String filename;
+
+    public AuthenticationDAO(@Value("${users.file}") String filename,ObjectMapper objectMapper) throws IOException {
+        this.filename = filename;
+        this.objectMapper = objectMapper;
+        load();
+    }
+
+    private void load() throws IOException {
+        userlist = new ArrayList();
+
+        User[] userArray = objectMapper.readValue(new File(filename),User[].class);
+
+        for (User user : userArray) {
+            userlist.add(user);
+        }
+    }
+
+    public User CheckUser(String username , String password){
+        for(int i = 0; i < userlist.size(); i++){
+            if(userlist.get(i).getUsername().equals(username) &&
+            userlist.get(i).getPassword().equals(password)){
+                return userlist.get(i);
+            }
+        }
+        return null;
+    }
+}

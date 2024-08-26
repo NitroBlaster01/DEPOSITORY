@@ -1,0 +1,20 @@
+form {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+img {
+  width: 100px;
+  height: 100px;
+}
+.invitem {
+  display: inline-block;
+  background-color: lightgrey;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+}
+.invitem .new {
+  display: block;
+}

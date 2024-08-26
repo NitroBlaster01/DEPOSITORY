@@ -1,0 +1,397 @@
+<!-- 
+<body>
+  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="fa-solid fa-house"></i> Logout</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              type="button"
+              (click)="goBack()"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Go Back</a
+            >
+          </li>
+        </ul>
+        <h1>Shopping Cart</h1>
+      </div>
+    </div>
+  </nav>
+
+  <div *ngIf="currentUser != null">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let prod of products" class="col-md-4">
+        <div *ngIf="prod.quantity != 0" class="item">
+          <h4>{{ prod.name }}</h4>
+          <img src="{{ prod.imageUrl }}" />
+          <p class="text-primary">${{ prod.price.toFixed(2) }}</p>
+          <form action="">
+            Purchase item:
+            <input
+              id="productquantity"
+              type="number"
+              #quantity
+              step="1"
+              min="0"
+              max="{{ prod.quantity }}"
+              value="{{ this.getProductQty(prod.id) }}"
+              placeholder="Qty."
+              class="input"
+            />
+            /{{ prod.quantity }}
+          </form>
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-primary"
+              (click)="update(prod.id, prod.name, quantity.value)"
+              type="button"
+            >
+              Save
+            </button>
+            <button
+              class="btn btn-primary"
+              (click)="update(prod.id, prod.name, '0')"
+              type="button"
+            >
+              Delete
+            </button>           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class = "container">
+    <div class = "d-grid gap-2">
+      <button
+        class = "btn btn-primary"
+        (click) = "accessCheckout()"
+        type = "button"
+      >
+        Checkout
+      </button>
+    </div>
+  </div>
+  </div>
+</body> -->
+
+<!--<button type="button" (click)="logOut()">Log Out</button>
+<button type="button" (click)="goBack()">Go Back</button>
+<div *ngIf="currentUser != null">
+  <div *ngFor="let prod of products" class="invitem-wrapper">
+    <div *ngIf="prod.quantity != 0" class="invitem" id="invitem">
+      <img src="{{ prod.imageUrl }}" />
+      <h1>{{ prod.name }}</h1>
+      <h2>${{ prod.price.toFixed(2) }}</h2>
+      <form action="">
+        Purchase item:
+        <input
+          id="productquantity"
+          type="number"
+          #quantity
+          step="1"
+          min="0"
+          max="{{ prod.quantity }}"
+          value="{{ this.getProductQty(prod.id) }}"
+          placeholder="Qty."
+          class="input"
+        />
+        /{{ prod.quantity }}
+      </form>
+      <button (click)="update(prod.id, prod.name, quantity.value)">
+        Save
+      </button>
+      <button (click)="update(prod.id, prod.name, '0')">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+-->
+
+<!-- start here -->
+<body>
+  <div class="cart_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <div class="cart_container">
+            <div class="cart_title">Shopping Cart</div>
+            <div *ngIf="currentUser">
+              <div *ngFor="let prod of products">
+                <div *ngIf="prod.quantity > 0">
+                  <div class="cart_items">
+                    <ul class="cart_list">
+                      <li class="cart_item clearfix">
+                        <!-- <div *ngFor="let prod of products">
+                    <div *ngIf="prod.quantity != 0"> -->
+                        <button
+                          class="btn btn-danger btn-sm rounded-0"
+                          type="button"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Delete"
+                          (click)="deleteItemInCart(currentUser.id, prod.id)"
+                        >
+                          <i class="fa fa-trash"></i>
+                        </button>
+                        <div class="cart_item_image">
+                          <img src="{{ prod.imageUrl }}" alt="" />
+                        </div>
+                        <div
+                          class="cart_item_info d-flex flex-md-row flex-column justify-content-between"
+                        >
+                          <div class="cart_item_name cart_info_col">
+                            <div class="cart_item_title">Name</div>
+                            <div class="cart_item_text">{{ prod.name }}</div>
+                          </div>
+                          <div class="cart_item_quantity cart_info_col">
+                            <div class="cart_item_title">Quantity</div>
+                            <div class="cart_item_text">
+                              <form action="">
+                                <input
+                                  id="productquantity"
+                                  type="number"
+                                  #quantity
+                                  step="1"
+                                  min="0"
+                                  max="{{ prod.quantity }}"
+                                  value="{{ this.getProductQty(prod.id) }}"
+                                  placeholder="Qty."
+                                  class="input"
+                                  (change)="
+                                    update(prod.id, prod.name, quantity.value)
+                                  "
+                                />
+                              </form>
+                            </div>
+                          </div>
+                          <div class="cart_item_quantity cart_info_col">
+                            <div class="cart_item_title">Available</div>
+                            <div class="cart_item_text">
+                              {{ prod.quantity }}
+                            </div>
+                          </div>
+                          <div class="cart_item_price cart_info_col">
+                            <div class="cart_item_title">Price</div>
+                            <div class="cart_item_text">
+                              ${{ prod.price.toFixed(2) }}
+                            </div>
+                          </div>
+                          <div class="cart_item_total cart_info_col">
+                            <div class="cart_item_title">Total</div>
+                            <div class="cart_item_text">
+                              ${{
+                                calculateProductPrice(
+                                  quantity.value,
+                                  prod.price
+                                ).toFixed(2)
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                        <!-- </div>
+                  </div> -->
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="order_total">
+              <div class="order_total_content text-md-right">
+                <div class="order_total_title">Order Total:</div>
+                <div class="order_total_amount">
+                  ${{ getTotalPrice().toFixed(2) }}
+                </div>
+              </div>
+            </div>
+            <div class="cart_buttons">
+              <button
+                type="button"
+                class="button cart_button_clear"
+                (click)="goBack()"
+              >
+                Continue Shopping
+              </button>
+              <button
+                type="button"
+                class="button cart_button_checkout"
+                data-bs-toggle="modal"
+                data-bs-target="#checkoutModal"
+              >
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div
+    class="modal fade"
+    id="checkoutModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Checkout</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form action = "">
+            <h1>Shipping Address</h1><br>
+            <label for ="fname">First name:</label>
+            <input type="text" id = "fname" name = "fname"><br><br>
+            <label for ="lname">Last name:</label>
+            <input type="text" id = "lname" name = "lname"><br><br>
+            <label for ="street">Street Address:</label>
+            <input type="text" id = "street" name = "street"><br><br>
+            <label for ="astreet">Additional Street Address:</label>
+            <input type="text" id = "astreet" name = "astreet"><br><br>
+            <label for ="city">City:</label>
+            <input type="text" id = "city" name = "city"><br><br>
+            <label for ="state">State/Territory:</label>
+            <select name="state" id="state">
+              <option value = "AL">AL - Alabama</option>
+              <option value = "AK">AK - Alaska</option>
+              <option value = "AZ">AZ - Arizona</option>
+              <option value = "AR">AR - Arkansas</option>
+              <option value = "AS">AS - American Somoa</option>
+              <option value = "CA">CA - California</option>
+              <option value = "CO">CO - Colorado</option>
+              <option value = "CT">CT - Connecticut</option>
+              <option value = "DE">DE - Delaware</option>
+              <option value = "DC">DC - District of Columbia</option>
+              <option value = "FL">FL - Florida</option>
+              <option value = "GA">GA - Georgia</option>
+              <option value = "GU">GU - Guam</option>
+              <option value = "HI">HI - Hawaii</option>
+              <option value = "ID">ID - Idaho</option>
+              <option value = "IL">IL - Illinois</option>
+              <option value = "IN">IN - Indiana</option>
+              <option value = "IA">IA - Iowa</option>
+              <option value = "KS">KS - Kansas</option>
+              <option value = "KY">KY - Kentucky</option>
+              <option value = "LA">LA - Louisiana</option>
+              <option value = "ME">ME - Maine</option>
+              <option value = "MD">MD - Maryland</option>
+              <option value = "MA">MA - Massachusetts</option>
+              <option value = "MI">MI - Michigan</option>
+              <option value = "MN">MN - Minnesota</option>
+              <option value = "MS">MS - Mississippi</option>
+              <option value = "MO">MO - Missouri</option>
+              <option value = "MT">MT - Montana</option>
+              <option value = "NE">NE - Nebraska</option>
+              <option value = "NV">NV - Nevada</option>
+              <option value = "NH">NH - New Hampshire</option>
+              <option value = "NJ">NJ - New Jersey</option>
+              <option value = "NM">NM - New Mexico</option>
+              <option value = "NY">NY - New York</option>
+              <option value = "NC">NC - North Carolina</option>
+              <option value = "ND">ND - North Dakota</option>
+              <option value = "CM">CM - Northern Mariana Islands</option>
+              <option value = "OH">OH - Ohio</option>
+              <option value = "OK">OK - Oklahoma</option>
+              <option value = "OR">OR - Oregon</option>
+              <option value = "PA">PA - Pennsylvania</option>
+              <option value = "PR">PR - Puerto Rico</option>
+              <option value = "RI">RI - Rhode Island</option>
+              <option value = "SC">SC - South Carolina</option>
+              <option value = "SD">SD - South Dakota</option>
+              <option value = "TN">TN - Tennessee</option>
+              <option value = "TX">TX - Texas</option>
+              <option value = "TT">TT - Trust Territories</option>
+              <option value = "UT">UT - Utah</option>
+              <option value = "VT">VT - Vermont</option>
+              <option value = "VA">VA - Virginia</option>
+              <option value = "VI">VI - Virgin Islands</option>
+              <option value = "WA">WA - Washington</option>
+              <option value = "WV">WV - West Virginia</option>
+              <option value = "WI">WI - Wisconsin</option>
+              <option value = "WY">WY - Wyoming</option>
+            </select><br><br>
+            <label for = "zipcode">Zipcode:</label>
+            <input type = "text" id = "zipcode" name = "zipcode"><br><br>
+          </form>
+        </div>
+        <div class="modal-body" id="credit">
+          <form action="">
+            <h1>Payment</h1><br>
+            <label for = "cname">Name on card:</label>
+            <input type = "text" id = "cname" name = "cname"><br><br>
+            <label for = "ctype">Card type:</label>
+            <select name="ctype">
+              <option value = "Visa">Visa</option>
+              <option value = "MasterCard">MasterCard</option>
+              <option value = "Discover">Discover Network</option>
+              <option value = "American">American Express</option>
+            </select><br><br>
+            <label for = "number">Card Number:</label>
+            <input
+            oninput="this.value=this.value.slice(0,this.maxLength)" 
+            type = "number" id = "number" name = "number" maxlength="16"><br><br>
+            <label for = "ccv">CCV:</label>
+            <input
+            oninput="this.value=this.value.slice(0,this.maxLength)"
+             type = "number" id = "ccv" name = "ccv" maxlength="3"><br><br>
+            <label for = "exp">Expiration(mm/year): </label>
+            <select name = "mm">
+              <option value = "01">1</option>
+              <option value = "02">2</option>
+              <option value = "03">3</option>
+              <option value = "04">4</option>
+              <option value = "05">5</option>
+              <option value = "06">6</option>
+              <option value = "07">7</option>
+              <option value = "08">8</option>
+              <option value = "09">9</option>
+              <option value = "10">10</option>
+              <option value = "11">11</option>
+              <option value = "12">12</option>
+            </select>
+            <label for = "/">/</label>
+            <input
+             oninput="this.value=this.value.slice(0,this.maxLength)"
+             type = "number" id = "year" name = "year" pattern="\d*" maxlength="4">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="checkOut()"
+            data-bs-dismiss="modal"
+            data-bs-target="#successMessage"
+          >
+            Purchase
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>

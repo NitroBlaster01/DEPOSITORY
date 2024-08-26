@@ -1,0 +1,81 @@
+<div class="parent clearfix">
+  <div class="bg-illustration">
+    <!-- <img src="https://i.ibb.co/Pcg0Pk1/logo.png" alt="logo" /> -->
+    <img
+      src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1458085141/okdjliszjcpjdu54hf4t.jpg"
+      alt="logo"
+    />
+
+    <div class="burger-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- <button
+    type="button"
+    routerLink="../home"
+    class="btn-close"
+    aria-label="Close"
+  ></button> -->
+  <button type="button" routerLink="../home" class="btn btn-outline-primary">
+    <i class="fa-solid fa-house"></i>
+    Home
+  </button>
+
+  <div class="login">
+    <div class="container">
+      <h1>Login to access to<br />your account</h1>
+
+      <div class="login-form">
+        <div
+          *ngIf="alert"
+          class="alert alert-danger d-flex align-items-center"
+          role="alert"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
+            viewBox="0 0 16 16"
+            role="img"
+            aria-label="Warning:"
+          >
+            <path
+              d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+            />
+          </svg>
+          <div>
+            {{ alert }}
+          </div>
+        </div>
+        <form action="">
+          <input
+            type="username"
+            id="new-username"
+            #userName
+            placeholder="Username"
+          />
+          <input
+            type="password"
+            id="new-password"
+            #userPassword
+            placeholder="Password"
+          />
+          <div class="create-account">
+            <a routerLink="../signup">Sign up?</a>
+          </div>
+          <button
+            type="submit"
+            (click)="logIn(userName.value, userPassword.value)"
+          >
+            LOG-IN
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

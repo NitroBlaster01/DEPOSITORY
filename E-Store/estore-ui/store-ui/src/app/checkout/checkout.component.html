@@ -1,0 +1,61 @@
+<body>
+  <nav class="navbar navbar-expand-lg navbar dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="fa-solid fa-house"></i> Logout
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggle-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              type="button"
+              (click)="goBack()"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Go Back</a
+            >
+          </li>
+        </ul>
+        <h1>Checkout</h1>
+      </div>
+    </div>
+  </nav>
+  <div *ngIf="currentUser != null">
+    <div class="container">
+      <div class="column">
+        <div *ngFor="let prod of products" class="invitem-wrapper">
+          <div *ngIf="prod.quantity > 0" class="invitem" id="invitem">
+            <h1>{{ prod.name }}</h1>
+            <img src="{{ prod.imageUrl }}" /><br />
+            <label for="qty">Quantity: {{ this.getProductQty(prod.id) }}</label
+            ><br />
+            <p class="text-primary">Unit Price: ${{ prod.price.toFixed(2) }}</p>
+            <label for="product_total"
+              >Product Total: ${{
+                product_Total(prod.id, this.getProductQty(prod.id))
+              }}</label
+            ><br />
+            <button (click)="update(prod.id, '0')">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h1>Order Total</h1>
+      <label for="order_Total"> Total: ${{ order_Total() }}</label>
+    </div>
+  </div>
+</body>
